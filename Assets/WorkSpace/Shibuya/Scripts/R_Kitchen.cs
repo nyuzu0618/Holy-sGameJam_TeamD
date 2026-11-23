@@ -29,6 +29,8 @@ public class R_Kitchen : MonoBehaviour
     // UI References
     // =========================
 
+    [SerializeField] private GameObject kitchenUIPrefab;
+
     [Header("Ingredient Buttons")]
     [SerializeField] private Button baseFoodAUI;
     [SerializeField] private Button baseFoodBUI;
@@ -475,5 +477,7 @@ public class R_Kitchen : MonoBehaviour
         isKitchenEnded = true;
 
         KitchenPhaseEnded?.Invoke(foodType);
+
+        Destroy(gameObject);
     }
 }

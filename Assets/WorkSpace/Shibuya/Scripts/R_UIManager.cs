@@ -54,6 +54,11 @@ public class R_UIManager : MonoBehaviour
     [SerializeField] private GameObject fadeInUIPrefab;
     [SerializeField] private GameObject fadeOutUIPrefab;
 
+    [Header("Result UI Prefabs")]
+    [SerializeField] private GameObject resultSPrefab;
+    [SerializeField] private GameObject resultAPrefab;
+    [SerializeField] private GameObject resultBPrefab;
+
 
     // =========================
     // Awake
@@ -293,6 +298,34 @@ public class R_UIManager : MonoBehaviour
                 );
                 return null;
         }
+    }
+
+    // =========================
+    // Result UI
+    // =========================
+
+    /// <summary>
+    /// Result S UIを生成する
+    /// </summary>
+    public GameObject CreateResultSUI()
+    {
+        return CreateUI(resultSPrefab);
+    }
+
+    /// <summary>
+    /// Result A UIを生成する
+    /// </summary>
+    public GameObject CreateResultAUI()
+    {
+        return CreateUI(resultAPrefab);
+    }
+
+    /// <summary>
+    /// Result B UIを生成する
+    /// </summary>
+    public GameObject CreateResultBUI()
+    {
+        return CreateUI(resultBPrefab);
     }
 
 

@@ -67,15 +67,26 @@ public class R_InGameManager : R_GameManagerBase
 
     public int CurrentStar => currentStar;
 
+    private GameObject currentResultUI;
+
+    private R_ResultSUI currentResultSUI;
+    private R_ResultAUI currentResultAUI;
+    private R_ResultBUI currentResultBUI;
+
 
     // =========================
-    // Spawn Customer
+    // Start
     // =========================
 
     public void Start()
     {
         PhaseChange(GamePhase.CustomerVisit);
     }
+
+
+    // =========================
+    // Spawn Customer
+    // =========================
 
     /// <summary>
     /// 客をランダムに1体スポーン
@@ -209,7 +220,6 @@ public class R_InGameManager : R_GameManagerBase
         // Customer食事フェーズ開始
         if (currentCustomer != null)
         {
-            // Kitchenで完成した料理をCustomerに渡す
             currentCustomer.OnCustomerEatPhaseStart(currentFoodType);
         }
         else
@@ -223,6 +233,81 @@ public class R_InGameManager : R_GameManagerBase
         Debug.Log("Result Phase Start");
 
         Debug.Log("Earned Star : " + currentStar);
+
+        if (R_UIManager.Instance == null)
+        {
+            Debug.LogError("R_UIManagerが存在しません。");
+            return;
+        }
+
+        // Star数に応じてResult UI生成
+        switch (currentStar)
+        {
+            case 3:
+                currentResultUI = R_UIManager.Instance.CreateResultSUI();
+
+                if (currentResultUI != null)
+                {
+                    currentResultSUI =
+                        currentResultUI.GetComponent<R_ResultSUI>();
+
+                    if (currentResultSUI != null)
+                    {
+                        currentResultSUI.ButtonClicked += OnResultButtonClicked;
+                    }
+                    else
+                    {
+                        Debug.LogError("Result S UIにR_ResultSUIがありません。");
+                    }
+                }
+                break;
+
+            case 2:
+                currentResultUI = R_UIManager.Instance.CreateResultAUI();
+
+                if (currentResultUI != null)
+                {
+                    currentResultAUI =
+                        currentResultUI.GetComponent<R_ResultAUI>();
+
+                    if (currentResultAUI != null)
+                    {
+                        currentResultAUI.ButtonClicked += OnResultButtonClicked;
+                    }
+                    else
+                    {
+                        Debug.LogError("Result A UIにR_ResultAUIがありません。");
+                    }
+                }
+                break;
+
+            case 1:
+                currentResultUI = R_UIManager.Instance.CreateResultBUI();
+
+                if (currentResultUI != null)
+                {
+                    currentResultBUI =
+                        currentResultUI.GetComponent<R_ResultBUI>();
+
+                    if (currentResultBUI != null)
+                    {
+                        currentResultBUI.ButtonClicked += OnResultButtonClicked;
+                    }
+                    else
+                    {
+                        Debug.LogError("Result B UIにR_ResultBUIがありません。");
+                    }
+                }
+                break;
+
+            case 0:
+                Debug.Log("Star 0 : Result UIなし");
+                break;
+
+            default:
+                Debug.LogWarning("想定外のStar数です : " + currentStar);
+                break;
+        }
     }
 
 
@@ -286,5 +371,37 @@ public class R_InGameManager : R_GameManagerBase
 
         // Resultフェーズへ移行
         PhaseChange(GamePhase.Result);
+    }
+
+
+    // =========================
+    // Result Button
+    // =========================
+
+    /// <summary>
+    /// Result UIのボタン押下イベント受信
+    /// </summary>
+    private void OnResultButtonClicked()
+    {
+        Debug.Log("Result Button Clicked");
+
+        // イベント購読解除
+        if (currentResultSUI != null)
+        {
+            currentResultSUI.ButtonClicked -= OnResultButtonClicked;
+        }
+
+        if (currentResultAUI != null)
+        {
+            currentResultAUI.ButtonClicked -= OnResultButtonClicked;
+        }
+
+        if (currentResultBUI != null)
+        {
+            currentResultBUI.ButtonClicked -= OnResultButtonClicked;
+        }
+
+        // タイトルシーンへ移動
+        RequestSceneChange("Title");
     }
 }

@@ -204,6 +204,24 @@ public class H_Customer : MonoBehaviour
     public void OnCustomerEatPhaseStart(FoodType foodType)
     {
         Debug.Log("Customer Eat Phase Start : " + foodType);
+
+        // DreamFood A UI削除
+        if (dreamFoodAUI != null)
+        {
+            R_UIManager.Instance.DestroyUI(dreamFoodAUI);
+            dreamFoodAUI = null;
+        }
+
+        // DreamFood B UI削除
+        if (dreamFoodBUI != null)
+        {
+            R_UIManager.Instance.DestroyUI(dreamFoodBUI);
+            dreamFoodBUI = null;
+        }
+
+        // ボタン参照をクリア
+        dreamFoodAButton = null;
+        dreamFoodBButton = null;
     }
 
 

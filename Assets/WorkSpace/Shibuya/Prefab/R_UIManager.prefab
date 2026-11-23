@@ -125,5 +125,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   sampleUIPrefab: {fileID: 0}
+  titleUIPrefab: {fileID: 2306031928519427583, guid: 68d7ffaa6fd1c7f4f9ee108620406325, type: 3}
+  customerAUIprefab: {fileID: 685862260299056125, guid: ceb390d284bbfab4eb0f880bd8b82654, type: 3}
+  dreamFoodAPrefab: {fileID: 7246286867914709904, guid: acac6a0bdca53ff46b9a04df52f00859, type: 3}
+  dreamFoodBPrefab: {fileID: 8925660156181207369, guid: 48fa772efd61422459f0f2615383efc7, type: 3}
+  foodAPrefab: {fileID: 0}
+  foodBPrefab: {fileID: 0}
+  foodCPrefab: {fileID: 0}
+  foodDPrefab: {fileID: 0}
+  foodEPrefab: {fileID: 0}
+  foodFPrefab: {fileID: 0}
+  foodGPrefab: {fileID: 0}
+  foodHPrefab: {fileID: 0}
+  foodIPrefab: {fileID: 0}
+  foodJPrefab: {fileID: 0}
+  foodKPrefab: {fileID: 0}
+  foodLPrefab: {fileID: 0}
   fadeInUIPrefab: {fileID: 2491191088066343598, guid: 1f106dc1b6559744ab1a3ae39a48eaf8, type: 3}
   fadeOutUIPrefab: {fileID: 8166214199272150575, guid: e31ccd369aa7353428a5fdee82a64e92, type: 3}
+  resultSPrefab: {fileID: 2761374723501686319, guid: e759c62e8fb102f4e97ddc401349e7c4, type: 3}
+  resultAPrefab: {fileID: 6860456137376996961, guid: d1ddc71c52690904198aebbf258f59bd, type: 3}
+  resultBPrefab: {fileID: 7557409337114618774, guid: 9cb72bfbec3575b4db2d1b3111b134bd, type: 3}
