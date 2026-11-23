@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class R_InGameManager : R_GameManagerBase
@@ -26,20 +27,20 @@ public class R_InGameManager : R_GameManagerBase
     // =========================
 
     [Header("Customer Prefabs")]
-    [SerializeField] private CustomerA[] customerPrefabs;
+    [SerializeField] private H_Customer[] customerPrefabs;
 
     [Header("Spawn Position")]
     [SerializeField]
     private Vector3 customerSpawnPosition =
         new Vector3(-3f, 0f, 0f);
 
-    private CustomerA currentCustomer;
+    private H_Customer currentCustomer;
 
     private DreamFood currentDreamFood;
 
     public DreamFood CurrentDreamFood => currentDreamFood;
 
-    public CustomerA CurrentCustomer => currentCustomer;
+    public H_Customer CurrentCustomer => currentCustomer;
 
 
     // =========================
@@ -74,7 +75,7 @@ public class R_InGameManager : R_GameManagerBase
     /// <summary>
     /// 客をランダムに1体スポーン
     /// </summary>
-    public CustomerA SpawnCustomer()
+    public H_Customer SpawnCustomer()
     {
         if (customerPrefabs == null || customerPrefabs.Length == 0)
         {
@@ -84,7 +85,7 @@ public class R_InGameManager : R_GameManagerBase
 
         int randomIndex = Random.Range(0, customerPrefabs.Length);
 
-        CustomerA selectedCustomer = customerPrefabs[randomIndex];
+        H_Customer selectedCustomer = customerPrefabs[randomIndex];
 
         if (selectedCustomer == null)
         {
@@ -162,7 +163,7 @@ public class R_InGameManager : R_GameManagerBase
         Debug.Log("CustomerVisit Phase Start");
 
         // Customer生成
-        CustomerA customer = SpawnCustomer();
+        H_Customer customer = SpawnCustomer();
 
         // Customerフェーズ開始
         if (customer != null)

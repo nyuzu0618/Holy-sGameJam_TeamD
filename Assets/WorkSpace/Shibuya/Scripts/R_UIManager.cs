@@ -143,6 +143,24 @@ public class R_UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 指定した親の子としてUIを生成する
+    /// </summary>
+    private GameObject CreateUI(GameObject uiPrefab, Transform parent)
+    {
+        if (uiPrefab == null)
+        {
+            Debug.LogError("UI Prefabが設定されていません。");
+            return null;
+        }
+
+        GameObject uiObject = Instantiate(uiPrefab, parent, false);
+
+        uiObjects.Add(uiObject);
+
+        return uiObject;
+    }
+
+    /// <summary>
     /// UIを破棄して管理リストから削除する
     /// </summary>
     public void DestroyUI(GameObject uiObject)
@@ -190,24 +208,35 @@ public class R_UIManager : MonoBehaviour
     // =========================
 
     /// <summary>
-    /// DreamFoodに対応したUIを生成する
+    /// DreamFood AのUIを生成する
     /// </summary>
-    public GameObject CreateDreamFoodUI(DreamFood dreamFood)
+    public GameObject CreateDreamFoodAUI()
     {
-        switch (dreamFood)
-        {
-            case DreamFood.A:
-                return CreateUI(dreamFoodAPrefab);
+        return CreateUI(dreamFoodAPrefab);
+    }
 
-            case DreamFood.B:
-                return CreateUI(dreamFoodBPrefab);
+    /// <summary>
+    /// DreamFood AのUIを指定した親の子として生成する
+    /// </summary>
+    public GameObject CreateDreamFoodAUI(Transform parent)
+    {
+        return CreateUI(dreamFoodAPrefab, parent);
+    }
 
-            default:
-                Debug.LogError(
-                    "対応するDreamFood UIがありません : " + dreamFood
-                );
-                return null;
-        }
+    /// <summary>
+    /// DreamFood BのUIを生成する
+    /// </summary>
+    public GameObject CreateDreamFoodBUI()
+    {
+        return CreateUI(dreamFoodBPrefab);
+    }
+
+    /// <summary>
+    /// DreamFood BのUIを指定した親の子として生成する
+    /// </summary>
+    public GameObject CreateDreamFoodBUI(Transform parent)
+    {
+        return CreateUI(dreamFoodBPrefab, parent);
     }
 
 
