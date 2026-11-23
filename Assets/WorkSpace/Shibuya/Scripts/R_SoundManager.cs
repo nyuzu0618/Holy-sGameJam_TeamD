@@ -37,8 +37,10 @@ public class R_SoundManager : MonoBehaviour
     // =========================
 
     [Header("SE Clips")]
-    [SerializeField] private AudioClip buttonSE;
-    [SerializeField] private AudioClip damageSE;
+    [SerializeField] private AudioClip sheepBleatingSE
+;
+    [SerializeField] private AudioClip messageDisplaySE
+;
     [SerializeField] private AudioClip decisionSE;
 
     [Header("SE Volume")]
@@ -215,14 +217,14 @@ public class R_SoundManager : MonoBehaviour
     // SE Functions
     // =========================
 
-    public void PlayButtonSE()
+    public void PlaySheepBleatingSE()
     {
-        PlaySE(buttonSE);
+        PlaySE(sheepBleatingSE);
     }
 
-    public void PlayDamageSE()
+    public void PlayMessageDisplaySE()
     {
-        PlaySE(damageSE);
+        PlaySE(messageDisplaySE);
     }
 
     public void PlayDecisionSE()
