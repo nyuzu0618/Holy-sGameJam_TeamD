@@ -471,6 +471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: R_Kitchen
       objectReference: {fileID: 0}
+    - target: {fileID: 4349723643769205285, guid: bec6af10d64bcab4ab8f155a31ce4d0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
