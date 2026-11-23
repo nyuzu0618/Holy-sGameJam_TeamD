@@ -44,13 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0b6d7e04f9b06479e408aa0f1f9e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  titleBGM: {fileID: 0}
-  gameBGM: {fileID: 0}
-  resultBGM: {fileID: 0}
+  titleBGM: {fileID: 8300000, guid: eaf1c7989f3a8104099358012805b002, type: 3}
+  gameBGM: {fileID: 8300000, guid: 30cfc9bfbe140c64dbb3c6fd63b82187, type: 3}
+  resultBGM: {fileID: 8300000, guid: 10e47807a82cba843bcbf502c525b3ba, type: 3}
   bgmVolumeMultiplier: 1
-  bgmVolume: 1
-  buttonSE: {fileID: 0}
-  damageSE: {fileID: 0}
-  decisionSE: {fileID: 0}
+  bgmVolume: 0.25
+  sheepBleatingSE: {fileID: 8300000, guid: 28cd9fb46caf9d84eb6054483b433fbe, type: 3}
+  messageDisplaySE: {fileID: 8300000, guid: d178d2ff5b56a4f4aa4a809d561929d3, type: 3}
+  decisionSE: {fileID: 8300000, guid: c3cf7c1498c925b48834bccf0c02b66c, type: 3}
   seVolumeMultiplier: 1
-  seVolume: 1
+  seVolume: 0.5
