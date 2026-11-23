@@ -3,6 +3,14 @@ public enum GameState {
 
 }
 
+public enum TimeLine
+{
+    None,
+    Morning,
+    Lunch,
+    Dinner
+}
+
 public enum FoodType
 {
     None,
