@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332ee9cdc3f662349b230ec598ac2372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::H_Customer
+  favoriteFoods: 0100000002000000
+  dislikedFoods: 0c0000000b000000

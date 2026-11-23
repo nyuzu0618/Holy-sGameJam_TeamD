@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections;
 
 public class R_Kitchen : MonoBehaviour
 {
@@ -60,6 +61,9 @@ public class R_Kitchen : MonoBehaviour
 
     private bool isKitchenEnded = false;
 
+    // 料理完成後の待機中か
+    private bool isKitchenEnding = false;
+
     private Image dragImage;
 
     private RectTransform dragImageRect;
@@ -82,6 +86,7 @@ public class R_Kitchen : MonoBehaviour
         currentCookingTool = CookingTool.None;
 
         isKitchenEnded = false;
+        isKitchenEnding = false;
         isDragging = false;
 
         DestroyDragImage();
@@ -105,7 +110,7 @@ public class R_Kitchen : MonoBehaviour
 
     private void Update()
     {
-        if (isKitchenEnded)
+        if (isKitchenEnded || isKitchenEnding)
             return;
 
         if (Mouse.current == null)
@@ -320,8 +325,32 @@ public class R_Kitchen : MonoBehaviour
 
         Debug.Log("Completed FoodType : " + currentFoodType);
 
-        // 調理フェーズ終了
-        OnKitchenPhaseEnd(currentFoodType);
+        // 料理完成後の処理を開始
+        isKitchenEnding = true;
+
+        // FoodTypeに対応したFoodUIを生成
+        if (R_UIManager.Instance != null)
+        {
+            R_UIManager.Instance.CreateFoodUI(currentFoodType);
+        }
+        else
+        {
+            Debug.LogError("R_UIManagerが存在しません。");
+        }
+
+        // 1秒後にKitchenPhase終了
+        StartCoroutine(DelayedKitchenPhaseEnd(currentFoodType));
+    }
+
+
+    /// <summary>
+    /// FoodUI表示後、1秒待ってKitchenPhaseを終了
+    /// </summary>
+    private IEnumerator DelayedKitchenPhaseEnd(FoodType foodType)
+    {
+        yield return new WaitForSeconds(1f);
+
+        OnKitchenPhaseEnd(foodType);
     }
 
 

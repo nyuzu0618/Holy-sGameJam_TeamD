@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class H_Customer : MonoBehaviour
@@ -11,13 +12,20 @@ public class H_Customer : MonoBehaviour
     private string _name;
     private int _id;
 
+    // 好きな料理
+    [SerializeField]
+    private FoodType[] favoriteFoods;
+
+    // 嫌いな料理
+    [SerializeField]
+    private FoodType[] dislikedFoods;
+
 
     // =========================
     // UI
     // =========================
 
     private GameObject customerUI;
-
     private Canvas customerCanvas;
 
     private GameObject dreamFoodAUI;
@@ -32,7 +40,6 @@ public class H_Customer : MonoBehaviour
     // =========================
 
     public event Action<DreamFood> CustomerPhaseEnded;
-
     public event Action<int> CustomerEatPhaseEnded;
 
 
@@ -47,10 +54,7 @@ public class H_Customer : MonoBehaviour
     {
         Debug.Log("Customer Phase Start");
 
-        // Customer UI生成
         CreateCustomerUI();
-
-        // DreamFood UI生成
         CreateDreamFoodUI();
     }
 
@@ -70,7 +74,6 @@ public class H_Customer : MonoBehaviour
             return;
         }
 
-        // Customer UI生成
         customerUI = R_UIManager.Instance.CreateCustomerAUI();
 
         if (customerUI == null)
@@ -79,7 +82,6 @@ public class H_Customer : MonoBehaviour
             return;
         }
 
-        // Customer UI内のCanvas取得
         customerCanvas = customerUI.GetComponentInChildren<Canvas>(true);
 
         if (customerCanvas == null)
@@ -205,23 +207,107 @@ public class H_Customer : MonoBehaviour
     {
         Debug.Log("Customer Eat Phase Start : " + foodType);
 
+        // 料理を受け取った直後に評価判定
+        int star = GetStar(foodType);
+
+        Debug.Log("Customer Evaluation : Star " + star);
+
+        // CustomerUIのH_CustomerUIを取得
+        if (customerUI != null)
+        {
+            H_CustomerUI customerUIComponent =
+                customerUI.GetComponent<H_CustomerUI>();
+
+            if (customerUIComponent != null)
+            {
+                // 評価画像を設定
+                customerUIComponent.SetImage(star);
+            }
+            else
+            {
+                Debug.LogError(
+                    "Customer UIにH_CustomerUIがありません。"
+                );
+            }
+        }
+        else
+        {
+            Debug.LogError("Customer UIが存在しません。");
+        }
+
         // DreamFood A UI削除
         if (dreamFoodAUI != null)
         {
-            R_UIManager.Instance.DestroyUI(dreamFoodAUI);
+            if (R_UIManager.Instance != null)
+            {
+                R_UIManager.Instance.DestroyUI(dreamFoodAUI);
+            }
+
             dreamFoodAUI = null;
         }
 
         // DreamFood B UI削除
         if (dreamFoodBUI != null)
         {
-            R_UIManager.Instance.DestroyUI(dreamFoodBUI);
+            if (R_UIManager.Instance != null)
+            {
+                R_UIManager.Instance.DestroyUI(dreamFoodBUI);
+            }
+
             dreamFoodBUI = null;
         }
 
         // ボタン参照をクリア
         dreamFoodAButton = null;
         dreamFoodBButton = null;
+
+        // 1秒後にEatPhase終了通知
+        StartCoroutine(DelayedEatPhaseEnd(star));
+    }
+
+
+    /// <summary>
+    /// 料理の評価を判定する
+    /// </summary>
+    private int GetStar(FoodType foodType)
+    {
+        // 好きな料理なら3
+        if (favoriteFoods != null)
+        {
+            foreach (FoodType favoriteFood in favoriteFoods)
+            {
+                if (favoriteFood == foodType)
+                {
+                    return 3;
+                }
+            }
+        }
+
+        // 嫌いな料理なら1
+        if (dislikedFoods != null)
+        {
+            foreach (FoodType dislikedFood in dislikedFoods)
+            {
+                if (dislikedFood == foodType)
+                {
+                    return 1;
+                }
+            }
+        }
+
+        // それ以外なら2
+        return 2;
+    }
+
+
+    /// <summary>
+    /// 1秒待ってから食事フェーズを終了する
+    /// </summary>
+    private IEnumerator DelayedEatPhaseEnd(int star)
+    {
+        yield return new WaitForSeconds(1f);
+
+        OnCustomerEatPhaseEnd(star);
     }
 
 
