@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class R_InGameManager : R_GameManagerBase
@@ -48,15 +47,15 @@ public class R_InGameManager : R_GameManagerBase
     // =========================
 
     [Header("Kitchen Prefab")]
-    [SerializeField] private KitchenA kitchenPrefab;
+    [SerializeField] private R_Kitchen kitchenPrefab;
 
-    private KitchenA currentKitchen;
+    private R_Kitchen currentKitchen;
 
     private FoodType currentFoodType;
 
     public FoodType CurrentFoodType => currentFoodType;
 
-    public KitchenA CurrentKitchen => currentKitchen;
+    public R_Kitchen CurrentKitchen => currentKitchen;
 
 
     // =========================

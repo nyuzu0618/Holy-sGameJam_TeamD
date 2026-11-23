@@ -7,25 +7,60 @@ using System.Collections;
 
 public class R_UIManager : MonoBehaviour
 {
+    // =========================
     // Singleton
+    // =========================
+
     public static R_UIManager Instance { get; private set; }
 
-    // 生成したUIを管理
+
+    // =========================
+    // UI Management
+    // =========================
+
     private List<GameObject> uiObjects = new List<GameObject>();
 
-    [Header("UI Prefabs")]
+
+    // =========================
+    // UI Prefabs
+    // =========================
+
+    [Header("Basic UI Prefabs")]
     [SerializeField] private GameObject sampleUIPrefab;
     [SerializeField] private GameObject titleUIPrefab;
+
+    [Header("Customer UI Prefabs")]
+    [SerializeField] private GameObject customerAUIprefab;
+
+    [Header("DreamFood UI Prefabs")]
     [SerializeField] private GameObject dreamFoodAPrefab;
     [SerializeField] private GameObject dreamFoodBPrefab;
+
+    [Header("Food UI Prefabs")]
+    [SerializeField] private GameObject foodAPrefab;
+    [SerializeField] private GameObject foodBPrefab;
+    [SerializeField] private GameObject foodCPrefab;
+    [SerializeField] private GameObject foodDPrefab;
+    [SerializeField] private GameObject foodEPrefab;
+    [SerializeField] private GameObject foodFPrefab;
+    [SerializeField] private GameObject foodGPrefab;
+    [SerializeField] private GameObject foodHPrefab;
+    [SerializeField] private GameObject foodIPrefab;
+    [SerializeField] private GameObject foodJPrefab;
+    [SerializeField] private GameObject foodKPrefab;
+    [SerializeField] private GameObject foodLPrefab;
 
     [Header("Fade UI Prefabs")]
     [SerializeField] private GameObject fadeInUIPrefab;
     [SerializeField] private GameObject fadeOutUIPrefab;
 
+
+    // =========================
+    // Awake
+    // =========================
+
     private void Awake()
     {
-        // Singletonチェック
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -36,12 +71,15 @@ public class R_UIManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        // シーン移動時のイベント登録
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        // 初回チェック
         CheckEventSystem();
     }
+
+
+    // =========================
+    // OnDestroy
+    // =========================
 
     private void OnDestroy()
     {
@@ -52,36 +90,42 @@ public class R_UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// シーン読み込み完了時
-    /// </summary>
+
+    // =========================
+    // Scene Loaded
+    // =========================
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CheckEventSystem();
     }
 
-    /// <summary>
-    /// EventSystemの重複チェック
-    /// </summary>
+
+    // =========================
+    // EventSystem
+    // =========================
+
     private void CheckEventSystem()
     {
-        EventSystem[] eventSystems = FindObjectsByType<EventSystem>(
-            FindObjectsSortMode.None
-        );
+        EventSystem[] eventSystems =
+            FindObjectsByType<EventSystem>(FindObjectsSortMode.None);
 
         foreach (EventSystem eventSystem in eventSystems)
         {
-            // UIManagerの子にあるEventSystemは残す
             if (eventSystem.transform.IsChildOf(transform))
                 continue;
 
-            // それ以外は破棄
             Destroy(eventSystem.gameObject);
         }
     }
 
+
+    // =========================
+    // Create / Destroy UI
+    // =========================
+
     /// <summary>
-    /// UI生成・管理リスト登録
+    /// UIを生成して管理リストに登録する
     /// </summary>
     private GameObject CreateUI(GameObject uiPrefab)
     {
@@ -99,7 +143,7 @@ public class R_UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// UI破棄・管理リスト削除
+    /// UIを破棄して管理リストから削除する
     /// </summary>
     public void DestroyUI(GameObject uiObject)
     {
@@ -112,8 +156,9 @@ public class R_UIManager : MonoBehaviour
         }
     }
 
+
     // =========================
-    // UI生成関数
+    // Basic UI
     // =========================
 
     public GameObject CreateSampleUI()
@@ -123,18 +168,109 @@ public class R_UIManager : MonoBehaviour
 
     public GameObject CreateTitleUI()
     {
-        GameObject titleObject = Instantiate(titleUIPrefab);
-
-        return titleObject;
+        return Instantiate(titleUIPrefab);
     }
+
+
+    // =========================
+    // Customer UI
+    // =========================
+
+    /// <summary>
+    /// CustomerAのUIを生成する
+    /// </summary>
+    public GameObject CreateCustomerAUI()
+    {
+        return CreateUI(customerAUIprefab);
+    }
+
+
+    // =========================
+    // DreamFood UI
+    // =========================
+
+    /// <summary>
+    /// DreamFoodに対応したUIを生成する
+    /// </summary>
+    public GameObject CreateDreamFoodUI(DreamFood dreamFood)
+    {
+        switch (dreamFood)
+        {
+            case DreamFood.A:
+                return CreateUI(dreamFoodAPrefab);
+
+            case DreamFood.B:
+                return CreateUI(dreamFoodBPrefab);
+
+            default:
+                Debug.LogError(
+                    "対応するDreamFood UIがありません : " + dreamFood
+                );
+                return null;
+        }
+    }
+
+
+    // =========================
+    // Food UI
+    // =========================
+
+    /// <summary>
+    /// FoodTypeに対応したUIを生成する
+    /// </summary>
+    public GameObject CreateFoodUI(FoodType foodType)
+    {
+        switch (foodType)
+        {
+            case FoodType.A:
+                return CreateUI(foodAPrefab);
+
+            case FoodType.B:
+                return CreateUI(foodBPrefab);
+
+            case FoodType.C:
+                return CreateUI(foodCPrefab);
+
+            case FoodType.D:
+                return CreateUI(foodDPrefab);
+
+            case FoodType.E:
+                return CreateUI(foodEPrefab);
+
+            case FoodType.F:
+                return CreateUI(foodFPrefab);
+
+            case FoodType.G:
+                return CreateUI(foodGPrefab);
+
+            case FoodType.H:
+                return CreateUI(foodHPrefab);
+
+            case FoodType.I:
+                return CreateUI(foodIPrefab);
+
+            case FoodType.J:
+                return CreateUI(foodJPrefab);
+
+            case FoodType.K:
+                return CreateUI(foodKPrefab);
+
+            case FoodType.L:
+                return CreateUI(foodLPrefab);
+
+            default:
+                Debug.LogError(
+                    "対応するFood UIがありません : " + foodType
+                );
+                return null;
+        }
+    }
+
 
     // =========================
     // Fade Functions
     // =========================
 
-    /// <summary>
-    /// FadeIn UI生成
-    /// </summary>
     public void PlayFadeIn()
     {
         GameObject fadeUI = CreateUI(fadeInUIPrefab);
@@ -145,9 +281,6 @@ public class R_UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// FadeOut UI生成
-    /// </summary>
     public void PlayFadeOut()
     {
         GameObject fadeUI = CreateUI(fadeOutUIPrefab);
@@ -159,7 +292,7 @@ public class R_UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 0.5秒後にUIを自動破棄
+    /// 0.5秒後にUIを自動破棄する
     /// </summary>
     private IEnumerator DestroyUIAfterDelay(GameObject uiObject)
     {
