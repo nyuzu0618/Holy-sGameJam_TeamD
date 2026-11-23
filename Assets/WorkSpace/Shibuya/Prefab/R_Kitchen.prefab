@@ -140,7 +140,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 150
   m_TargetDisplay: 0
 --- !u!114 &4384084850623317922
 MonoBehaviour:
@@ -227,12 +227,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e096bd4c0a834a040b81e59ecf062676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  kitchenUIPrefab: {fileID: 0}
   baseFoodAUI: {fileID: 3331765752248840401}
   baseFoodBUI: {fileID: 3175370190934369386}
   baseFoodCUI: {fileID: 8152881200509351540}
   potUI: {fileID: 5496042734425479827}
   panUI: {fileID: 6649358655661288714}
   canvas: {fileID: 7119055907049232557}
+  panAnimator: {fileID: 1957585683677487146}
 --- !u!1 &6386145774684579724
 GameObject:
   m_ObjectHideFlags: 0

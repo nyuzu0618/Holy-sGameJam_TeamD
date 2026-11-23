@@ -129,9 +129,6 @@ public class R_UIManager : MonoBehaviour
     // Create / Destroy UI
     // =========================
 
-    /// <summary>
-    /// UIを生成して管理リストに登録する
-    /// </summary>
     private GameObject CreateUI(GameObject uiPrefab)
     {
         if (uiPrefab == null)
@@ -147,9 +144,6 @@ public class R_UIManager : MonoBehaviour
         return uiObject;
     }
 
-    /// <summary>
-    /// 指定した親の子としてUIを生成する
-    /// </summary>
     private GameObject CreateUI(GameObject uiPrefab, Transform parent)
     {
         if (uiPrefab == null)
@@ -165,9 +159,6 @@ public class R_UIManager : MonoBehaviour
         return uiObject;
     }
 
-    /// <summary>
-    /// UIを破棄して管理リストから削除する
-    /// </summary>
     public void DestroyUI(GameObject uiObject)
     {
         if (uiObject == null)
@@ -199,9 +190,6 @@ public class R_UIManager : MonoBehaviour
     // Customer UI
     // =========================
 
-    /// <summary>
-    /// CustomerAのUIを生成する
-    /// </summary>
     public GameObject CreateCustomerAUI()
     {
         return CreateUI(customerAUIprefab);
@@ -212,33 +200,21 @@ public class R_UIManager : MonoBehaviour
     // DreamFood UI
     // =========================
 
-    /// <summary>
-    /// DreamFood AのUIを生成する
-    /// </summary>
     public GameObject CreateDreamFoodAUI()
     {
         return CreateUI(dreamFoodAPrefab);
     }
 
-    /// <summary>
-    /// DreamFood AのUIを指定した親の子として生成する
-    /// </summary>
     public GameObject CreateDreamFoodAUI(Transform parent)
     {
         return CreateUI(dreamFoodAPrefab, parent);
     }
 
-    /// <summary>
-    /// DreamFood BのUIを生成する
-    /// </summary>
     public GameObject CreateDreamFoodBUI()
     {
         return CreateUI(dreamFoodBPrefab);
     }
 
-    /// <summary>
-    /// DreamFood BのUIを指定した親の子として生成する
-    /// </summary>
     public GameObject CreateDreamFoodBUI(Transform parent)
     {
         return CreateUI(dreamFoodBPrefab, parent);
@@ -249,9 +225,6 @@ public class R_UIManager : MonoBehaviour
     // Food UI
     // =========================
 
-    /// <summary>
-    /// FoodTypeに対応したUIを生成する
-    /// </summary>
     public GameObject CreateFoodUI(FoodType foodType)
     {
         switch (foodType)
@@ -293,36 +266,26 @@ public class R_UIManager : MonoBehaviour
                 return CreateUI(foodLPrefab);
 
             default:
-                Debug.LogError(
-                    "対応するFood UIがありません : " + foodType
-                );
+                Debug.LogError("対応するFood UIがありません : " + foodType);
                 return null;
         }
     }
+
 
     // =========================
     // Result UI
     // =========================
 
-    /// <summary>
-    /// Result S UIを生成する
-    /// </summary>
     public GameObject CreateResultSUI()
     {
         return CreateUI(resultSPrefab);
     }
 
-    /// <summary>
-    /// Result A UIを生成する
-    /// </summary>
     public GameObject CreateResultAUI()
     {
         return CreateUI(resultAPrefab);
     }
 
-    /// <summary>
-    /// Result B UIを生成する
-    /// </summary>
     public GameObject CreateResultBUI()
     {
         return CreateUI(resultBPrefab);
@@ -333,33 +296,35 @@ public class R_UIManager : MonoBehaviour
     // Fade Functions
     // =========================
 
+    /// <summary>
+    /// FadeInを生成する。
+    /// 破棄はシーン遷移に任せる。
+    /// </summary>
     public void PlayFadeIn()
     {
-        GameObject fadeUI = CreateUI(fadeInUIPrefab);
-
-        if (fadeUI != null)
-        {
-            StartCoroutine(DestroyUIAfterDelay(fadeUI));
-        }
+        CreateUI(fadeInUIPrefab);
     }
 
+    /// <summary>
+    /// FadeOutを生成し、1秒後に破棄する。
+    /// </summary>
     public void PlayFadeOut()
     {
         GameObject fadeUI = CreateUI(fadeOutUIPrefab);
 
         if (fadeUI != null)
         {
-            StartCoroutine(DestroyUIAfterDelay(fadeUI));
+            StartCoroutine(DestroyFadeOutAfterDelay(fadeUI));
         }
     }
 
     /// <summary>
-    /// 0.5秒後にUIを自動破棄する
+    /// 1秒後にFadeOutの破棄を依頼する
     /// </summary>
-    private IEnumerator DestroyUIAfterDelay(GameObject uiObject)
+    private IEnumerator DestroyFadeOutAfterDelay(GameObject fadeUI)
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
 
-        DestroyUI(uiObject);
+        DestroyUI(fadeUI);
     }
 }

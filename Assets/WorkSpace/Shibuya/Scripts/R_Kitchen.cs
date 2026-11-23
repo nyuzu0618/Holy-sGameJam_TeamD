@@ -44,6 +44,8 @@ public class R_Kitchen : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private Canvas canvas;
 
+    [Header("Cooking Animations")]
+    [SerializeField] private SevenFrameAnimator panAnimator;
 
     // =========================
     // Kitchen Data
@@ -270,12 +272,22 @@ public class R_Kitchen : MonoBehaviour
             currentCookingTool = CookingTool.Pot;
         }
         else if (panUI != null &&
-            RectTransformUtility.RectangleContainsScreenPoint(
-                panUI,
-                mousePosition,
-                camera))
+    RectTransformUtility.RectangleContainsScreenPoint(
+        panUI,
+        mousePosition,
+        camera))
         {
             currentCookingTool = CookingTool.Pan;
+
+            // フライパンのアニメーション開始
+            if (panAnimator != null)
+            {
+                panAnimator.AnimationStart();
+            }
+            else
+            {
+                Debug.LogError("Pan Animatorが設定されていません。");
+            }
         }
         else
         {

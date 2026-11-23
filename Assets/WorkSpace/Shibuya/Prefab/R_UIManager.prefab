@@ -129,18 +129,18 @@ MonoBehaviour:
   customerAUIprefab: {fileID: 8018393441113908747, guid: 77a6e207163bacd4ca60d9597ca2a934, type: 3}
   dreamFoodAPrefab: {fileID: 1273260895502084556, guid: c0b6cdebbf31f0841aca1cc097c5598b, type: 3}
   dreamFoodBPrefab: {fileID: 2332821161487622489, guid: c9e8ad40e55abdb4d8fbecfc1707e348, type: 3}
-  foodAPrefab: {fileID: 0}
-  foodBPrefab: {fileID: 0}
-  foodCPrefab: {fileID: 0}
-  foodDPrefab: {fileID: 0}
-  foodEPrefab: {fileID: 0}
-  foodFPrefab: {fileID: 0}
-  foodGPrefab: {fileID: 0}
-  foodHPrefab: {fileID: 0}
-  foodIPrefab: {fileID: 0}
-  foodJPrefab: {fileID: 0}
-  foodKPrefab: {fileID: 0}
-  foodLPrefab: {fileID: 0}
+  foodAPrefab: {fileID: 3222181363693912088, guid: 64398e3ece22d4043bf5be6416317c6a, type: 3}
+  foodBPrefab: {fileID: 2974180772918353989, guid: a648093f0cdb0c54eb2ea70c459066b0, type: 3}
+  foodCPrefab: {fileID: 4619178183113625392, guid: c1d789467cb7c824c979afae2eb20e1e, type: 3}
+  foodDPrefab: {fileID: 6697490339912494356, guid: d7f3ac7479658c941818ff402bec29d2, type: 3}
+  foodEPrefab: {fileID: 6235848570906782778, guid: b35dc1a982e977e4ba52cf658326f9a7, type: 3}
+  foodFPrefab: {fileID: 4174770477690128331, guid: bfa3b6405a190e246a3f5b2ba167ce30, type: 3}
+  foodGPrefab: {fileID: 1106726433215666056, guid: 7db1d59b4a8d2db4e92d2cd0e86bf765, type: 3}
+  foodHPrefab: {fileID: 4619178183113625392, guid: c1d789467cb7c824c979afae2eb20e1e, type: 3}
+  foodIPrefab: {fileID: 3222181363693912088, guid: 64398e3ece22d4043bf5be6416317c6a, type: 3}
+  foodJPrefab: {fileID: 4301409108831912673, guid: fd2be607784b21640bdcbcc730cf4d51, type: 3}
+  foodKPrefab: {fileID: 1701935617115559268, guid: ee86df0f36aca7c44a65cfe708daecaf, type: 3}
+  foodLPrefab: {fileID: 2366404016673874384, guid: 3b4637a1bda60e2409e3ec77da1b71fc, type: 3}
   fadeInUIPrefab: {fileID: 2491191088066343598, guid: 1f106dc1b6559744ab1a3ae39a48eaf8, type: 3}
   fadeOutUIPrefab: {fileID: 8166214199272150575, guid: e31ccd369aa7353428a5fdee82a64e92, type: 3}
   resultSPrefab: {fileID: 2761374723501686319, guid: e759c62e8fb102f4e97ddc401349e7c4, type: 3}
