@@ -42,3 +42,11 @@ public enum DreamFood
     B,
     C
 }
+
+public enum BaseFood
+{
+    None,
+    A,
+    B,
+    C
+}

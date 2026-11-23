@@ -23,6 +23,11 @@ public class R_BackgroundAnimator : MonoBehaviour
 
     private TimeLine currentTimeLine = TimeLine.None;
 
+    private void Start()
+    {
+        SetBackTime(TimeLine.Morning);
+    }
+
     private void Update()
     {
         if (currentSprites == null || currentSprites.Length == 0)

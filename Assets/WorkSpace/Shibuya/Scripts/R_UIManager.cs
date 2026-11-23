@@ -16,6 +16,8 @@ public class R_UIManager : MonoBehaviour
     [Header("UI Prefabs")]
     [SerializeField] private GameObject sampleUIPrefab;
     [SerializeField] private GameObject titleUIPrefab;
+    [SerializeField] private GameObject dreamFoodAPrefab;
+    [SerializeField] private GameObject dreamFoodBPrefab;
 
     [Header("Fade UI Prefabs")]
     [SerializeField] private GameObject fadeInUIPrefab;

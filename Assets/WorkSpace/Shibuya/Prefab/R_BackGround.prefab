@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f96befefd8dacbf4da81a44afb1a8d86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5172dd82b55efa0408da68c176cafccc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91,7 +91,12 @@ MonoBehaviour:
   backgroundImage: {fileID: 4475796783473173729}
   frameInterval: 0.2
   loop: 1
-  morningSprites: []
+  morningSprites:
+  - {fileID: 21300000, guid: d4973f6d7f65ea44c8e10e6b2bee177e, type: 3}
+  - {fileID: 21300000, guid: 4709a82217d8d8c44aca30f8f98a8a79, type: 3}
+  - {fileID: 21300000, guid: 04c928b2ce467fd4fbe95ffc015735f1, type: 3}
+  - {fileID: 21300000, guid: d778fc3d293124248813aba0f21a0e21, type: 3}
+  - {fileID: 21300000, guid: b5454f8f1fda33d49bb8a5700b6b71b7, type: 3}
   lunchSprites: []
   dinnerSprites: []
 --- !u!1 &7311464559260419800
