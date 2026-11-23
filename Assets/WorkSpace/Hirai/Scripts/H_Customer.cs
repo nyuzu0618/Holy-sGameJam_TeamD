@@ -23,6 +23,9 @@ public class H_Customer : MonoBehaviour
     private GameObject dreamFoodAUI;
     private GameObject dreamFoodBUI;
 
+    private H_CustomerDeramAUIButton dreamFoodAButton;
+    private H_CustomerDeramBUIButton dreamFoodBButton;
+
 
     // =========================
     // Events
@@ -96,13 +99,72 @@ public class H_Customer : MonoBehaviour
     /// </summary>
     private void CreateDreamFoodUI()
     {
+        if (customerCanvas == null)
+        {
+            Debug.LogError("Customer Canvasが取得されていません。");
+            return;
+        }
+
+        // DreamFood A生成
         dreamFoodAUI = R_UIManager.Instance.CreateDreamFoodAUI(
             customerCanvas.transform
         );
 
+        // DreamFood B生成
         dreamFoodBUI = R_UIManager.Instance.CreateDreamFoodBUI(
             customerCanvas.transform
         );
+
+        // DreamFood Aボタン取得
+        if (dreamFoodAUI != null)
+        {
+            dreamFoodAButton =
+                dreamFoodAUI.GetComponent<H_CustomerDeramAUIButton>();
+
+            if (dreamFoodAButton != null)
+            {
+                dreamFoodAButton.ButtonClicked += OnDreamFoodSelected;
+            }
+            else
+            {
+                Debug.LogError(
+                    "DreamFood A UIにH_CustomerDeramAUIButtonがありません。"
+                );
+            }
+        }
+
+        // DreamFood Bボタン取得
+        if (dreamFoodBUI != null)
+        {
+            dreamFoodBButton =
+                dreamFoodBUI.GetComponent<H_CustomerDeramBUIButton>();
+
+            if (dreamFoodBButton != null)
+            {
+                dreamFoodBButton.ButtonClicked += OnDreamFoodSelected;
+            }
+            else
+            {
+                Debug.LogError(
+                    "DreamFood B UIにH_CustomerDeramBUIButtonがありません。"
+                );
+            }
+        }
+    }
+
+
+    // =========================
+    // DreamFood Selection
+    // =========================
+
+    /// <summary>
+    /// DreamFood A/Bの選択イベント受信
+    /// </summary>
+    private void OnDreamFoodSelected(DreamFood food)
+    {
+        Debug.Log("DreamFood Selected : " + food);
+
+        OnCustomerPhaseEnd(food);
     }
 
 
@@ -116,6 +178,17 @@ public class H_Customer : MonoBehaviour
     public void OnCustomerPhaseEnd(DreamFood food)
     {
         Debug.Log("Customer Phase End : " + food);
+
+        // ボタンイベント購読解除
+        if (dreamFoodAButton != null)
+        {
+            dreamFoodAButton.ButtonClicked -= OnDreamFoodSelected;
+        }
+
+        if (dreamFoodBButton != null)
+        {
+            dreamFoodBButton.ButtonClicked -= OnDreamFoodSelected;
+        }
 
         CustomerPhaseEnded?.Invoke(food);
     }
@@ -142,5 +215,24 @@ public class H_Customer : MonoBehaviour
         Debug.Log("Customer Eat Phase End : Star " + star);
 
         CustomerEatPhaseEnded?.Invoke(star);
+    }
+
+
+    // =========================
+    // OnDestroy
+    // =========================
+
+    private void OnDestroy()
+    {
+        // イベント購読解除
+        if (dreamFoodAButton != null)
+        {
+            dreamFoodAButton.ButtonClicked -= OnDreamFoodSelected;
+        }
+
+        if (dreamFoodBButton != null)
+        {
+            dreamFoodBButton.ButtonClicked -= OnDreamFoodSelected;
+        }
     }
 }

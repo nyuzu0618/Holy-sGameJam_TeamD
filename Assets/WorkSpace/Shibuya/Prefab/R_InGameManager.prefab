@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::R_InGameManager
   currentPhase: 0
-  customerPrefabs: []
+  customerPrefabs:
+  - {fileID: 0}
   customerSpawnPosition: {x: -3, y: 0, z: 0}
   kitchenPrefab: {fileID: 0}

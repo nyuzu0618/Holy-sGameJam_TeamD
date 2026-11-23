@@ -72,6 +72,11 @@ public class R_InGameManager : R_GameManagerBase
     // Spawn Customer
     // =========================
 
+    public void Start()
+    {
+        PhaseChange(GamePhase.CustomerVisit);
+    }
+
     /// <summary>
     /// 客をランダムに1体スポーン
     /// </summary>
